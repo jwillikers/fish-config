@@ -75,7 +75,6 @@ To update the settings in this repository from an existing installation, follow 
 git -C ~/Projects clone git@github.com:jwillikers/fish-config.git
 ----
 
-. Copy the `config` file from the config directory to this repository.
 . Copy the configuration files in the `~/.config/fish/conf.d` directory to the repository.
 +
 [,sh]
