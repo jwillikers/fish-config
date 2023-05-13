@@ -1,0 +1,122 @@
+= fish Config
+Jordan Williams <jordan@jwillikers.com>
+:experimental:
+:icons: font
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+:fish: https://fishshell.com/[fish]
+
+My configuration for the {fish} shell.
+
+== Usage
+
+This repository contains the configuration files for {fish}.
+This file is synchronized using this Git repository.
+The following instructions detail how to use and sync this repository.
+
+== Set up
+
+Some packages need to be installed before using this configuration.
+Obviously, the `fish` package must be installed.
+Since GNOME Keyring is used to manage credentials, this package should also be installed.
+
+. Install the `fish` and `gnome-keyring` packages.
++
+[,sh]
+----
+sudo rpm-ostree install fish gnome-keyring
+----
+
+. Reboot for the changes to take effect.
++
+[,sh]
+----
+sudo systemctl reboot
+----
+
+=== Install
+
+Install these settings with the following instructions.
+
+. Clone this repository.
++
+[,sh]
+----
+git -C ~/Projects clone git@github.com:jwillikers/fish-config.git
+----
+
+. Create the _~/.config/fish/conf.d_ directory.
++
+[,sh]
+----
+mkdir ~/.config/fish/conf.d
+----
+
+. Copy the configuration files in the `fish/conf.d` directory to the fish configuration directory.
++
+[,sh]
+----
+cp ~/Projects/fish-config/fish/conf.d/*.fish ~/.config/fish/conf.d/
+----
+
+=== Update
+
+To update the settings in this repository from an existing installation, follow these steps.
+
+. If you haven't already done so, clone this repository.
++
+[,sh]
+----
+git -C ~/Projects clone git@github.com:jwillikers/fish-config.git
+----
+
+. Copy the `config` file from the config directory to this repository.
+. Copy the configuration files in the `~/.config/fish/conf.d` directory to the repository.
++
+[,sh]
+----
+cp ~/.config/fish/conf.d/*.fish ~/Projects/fish-config/fish/conf.d/
+----
+
+. Stage the updated file.
++
+[,sh]
+----
+git -C ~/Projects/fish-config add -A
+----
+
+. Commit.
++
+[,sh]
+----
+git -C ~/Projects/fish-config commit -m "Update configuration putting all others to shame"
+----
+
+. Push the changes back to the central repository.
++
+[,sh]
+----
+git -C ~/Projects/fish-config push
+----
+
+== Code of Conduct
+
+Please refer to the project's link:CODE_OF_CONDUCT.adoc[Code of Conduct].
+
+== License
+
+This repository is licensed under the https://www.gnu.org/licenses/gpl-3.0.html[GPLv3].
+Please refer to the bundled link:LICENSE.adoc[license].
+
+== Copyright
+
+© 2023 Jordan Williams
+
+== Authors
+
+mailto:{email}[{author}]
