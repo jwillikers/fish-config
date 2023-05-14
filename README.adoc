@@ -9,7 +9,10 @@ ifdef::env-github[]
 :caution-caption: :fire:
 :warning-caption: :warning:
 endif::[]
+:carapace-bin: https://rsteube.github.io/carapace-bin/carapace-bin.html[carapace-bin]
 :fish: https://fishshell.com/[fish]
+:GNOME-Keyring: https://wiki.gnome.org/Projects/GnomeKeyring[GNOME-Keyring]
+:Starship: https://starship.rs/[Starship]
 
 My configuration for the {fish} shell.
 
@@ -21,15 +24,34 @@ The following instructions detail how to use and sync this repository.
 
 == Set up
 
-Some packages need to be installed before using this configuration.
-Obviously, the `fish` package must be installed.
-Since GNOME Keyring is used to manage credentials, this package should also be installed.
+My fish configuration relies on several other utilities: {carapace-bin} for completions, {GNOME-Keyring} for secrets management, and {Starship} for the prompt configuration.
+These utilities must be installed before utilizing the configuration.
 
-. Install the `fish` and `gnome-keyring` packages.
+. Add the `rsteube` user's RPM repository to your system which provides the `carapace-bin` package.
++
+./etc/yum.repos.d/rsteube-fury.repo
+[,sh]
+----
+[fury]
+name=Gemfury Private Repo
+baseurl=https://yum.fury.io/rsteube/
+enabled=1
+gpgcheck=0
+----
+
+. Add the `starship` COPR repository to your system.
 +
 [,sh]
 ----
-sudo rpm-ostree install fish gnome-keyring
+curl -L https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora/atim-starship-fedora.repo \
+  | sudo tee /etc/yum.repos.d/atim-starship-fedora.repo
+----
+
+. Install the packages.
++
+[,sh]
+----
+sudo rpm-ostree install carapace-bin fish gnome-keyring starship
 ----
 
 . Reboot for the changes to take effect.
