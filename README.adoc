@@ -86,6 +86,8 @@ mkdir ~/.config/fish/conf.d
 cp ~/Projects/fish-config/fish/conf.d/*.fish ~/.config/fish/conf.d/
 ----
 
+. Follow the install instructions in the https://github.com/jwillikers/starship-config[Starship config repository] to configure the prompt.
+
 === Update
 
 To update the settings in this repository from an existing installation, follow these steps.
