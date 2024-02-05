@@ -43,7 +43,7 @@ gpgcheck=0
 +
 [,sh]
 ----
-curl -L https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora/atim-starship-fedora.repo \
+curl --location https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora/atim-starship-fedora.repo \
   | sudo tee /etc/yum.repos.d/atim-starship-fedora.repo
 ----
 
@@ -76,56 +76,17 @@ git -C ~/Projects clone git@github.com:jwillikers/fish-config.git
 +
 [,sh]
 ----
-mkdir ~/.config/fish/conf.d
+mkdir --parents ~/.config/fish/conf.d
 ----
 
-. Copy the configuration files in the `fish/conf.d` directory to the fish configuration directory.
+. Symlink the configuration files in the `fish/conf.d` directory to the fish configuration directory.
 +
 [,sh]
 ----
-cp ~/Projects/fish-config/fish/conf.d/*.fish ~/.config/fish/conf.d/
+ln --relative --symbolic --force ~/Projects/fish-config/fish/conf.d/*.fish ~/.config/fish/conf.d/
 ----
 
 . Follow the install instructions in the https://github.com/jwillikers/starship-config[Starship config repository] to configure the prompt.
-
-=== Update
-
-To update the settings in this repository from an existing installation, follow these steps.
-
-. If you haven't already done so, clone this repository.
-+
-[,sh]
-----
-git -C ~/Projects clone git@github.com:jwillikers/fish-config.git
-----
-
-. Copy the configuration files in the `~/.config/fish/conf.d` directory to the repository.
-+
-[,sh]
-----
-cp ~/.config/fish/conf.d/*.fish ~/Projects/fish-config/fish/conf.d/
-----
-
-. Stage the updated file.
-+
-[,sh]
-----
-git -C ~/Projects/fish-config add -A
-----
-
-. Commit.
-+
-[,sh]
-----
-git -C ~/Projects/fish-config commit -m "Update configuration putting all others to shame"
-----
-
-. Push the changes back to the central repository.
-+
-[,sh]
-----
-git -C ~/Projects/fish-config push
-----
 
 == Code of Conduct
 
@@ -138,7 +99,7 @@ Please refer to the bundled link:LICENSE.adoc[license].
 
 == Copyright
 
-© 2023 Jordan Williams
+© 2023-2024 Jordan Williams
 
 == Authors
 
