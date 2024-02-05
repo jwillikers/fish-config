@@ -11,7 +11,7 @@ ifdef::env-github[]
 endif::[]
 :carapace-bin: https://rsteube.github.io/carapace-bin/carapace-bin.html[carapace-bin]
 :fish: https://fishshell.com/[fish]
-:GNOME-Keyring: https://wiki.gnome.org/Projects/GnomeKeyring[GNOME-Keyring]
+:GCR: https://gitlab.gnome.org/GNOME/gcr[GCR]
 :Starship: https://starship.rs/[Starship]
 
 My configuration for the {fish} shell.
@@ -24,7 +24,7 @@ The following instructions detail how to use and sync this repository.
 
 == Set up
 
-My fish configuration relies on several other utilities: {carapace-bin} for completions, {GNOME-Keyring} for secrets management, and {Starship} for the prompt configuration.
+My fish configuration relies on several other utilities: {carapace-bin} for completions, {GCR} for the SSH agent, and {Starship} for the prompt configuration.
 These utilities must be installed before utilizing the configuration.
 
 . Add the `rsteube` user's RPM repository to your system which provides the `carapace-bin` package.
@@ -51,7 +51,7 @@ curl --location https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedor
 +
 [,sh]
 ----
-sudo rpm-ostree install carapace-bin fish gnome-keyring starship
+sudo rpm-ostree install carapace-bin fish gcr starship
 ----
 
 . Reboot for the changes to take effect.
@@ -59,6 +59,13 @@ sudo rpm-ostree install carapace-bin fish gnome-keyring starship
 [,sh]
 ----
 sudo systemctl reboot
+----
+
+. Enable the GCR SSH agent socket for the user.
++
+[,sh]
+----
+systemctl --user enable --now gcr-ssh-agent.socket
 ----
 
 === Install
@@ -86,7 +93,16 @@ mkdir --parents ~/.config/fish/conf.d
 ln --relative --symbolic --force ~/Projects/fish-config/fish/conf.d/*.fish ~/.config/fish/conf.d/
 ----
 
+. Set the `SSH_AUTH_SOCK` environment variable to the GCR SSH agent socket.
++
+[,sh]
+----
+set --universal --export SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gcr/ssh
+----
+
 . Follow the install instructions in the https://github.com/jwillikers/starship-config[Starship config repository] to configure the prompt.
+
+. Open a new shell to complete the installation.
 
 == Code of Conduct
 
