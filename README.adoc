@@ -11,7 +11,7 @@ ifdef::env-github[]
 endif::[]
 :carapace-bin: https://rsteube.github.io/carapace-bin/carapace-bin.html[carapace-bin]
 :fish: https://fishshell.com/[fish]
-:GCR: https://gitlab.gnome.org/GNOME/gcr[GCR]
+:just: https://github.com/casey/just[just]
 :Starship: https://starship.rs/[Starship]
 
 My configuration for the {fish} shell.
@@ -22,85 +22,41 @@ This repository contains the configuration files for {fish}.
 This file is synchronized using this Git repository.
 The following instructions detail how to use and sync this repository.
 
-== Set up
-
-My fish configuration relies on several other utilities: {carapace-bin} for completions, {GCR} for the SSH agent, and {Starship} for the prompt configuration.
-These utilities must be installed before utilizing the configuration.
-
-. Add the `rsteube` user's RPM repository to your system which provides the `carapace-bin` package.
-+
-./etc/yum.repos.d/rsteube-fury.repo
-[,sh]
-----
-[fury]
-name=Gemfury Private Repo
-baseurl=https://yum.fury.io/rsteube/
-enabled=1
-gpgcheck=0
-----
-
-. Add the `starship` COPR repository to your system.
-+
-[,sh]
-----
-curl --location https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora/atim-starship-fedora.repo \
-  | sudo tee /etc/yum.repos.d/atim-starship-fedora.repo
-----
-
-. Install the packages.
-+
-[,sh]
-----
-sudo rpm-ostree install carapace-bin fish gcr starship
-----
-
-. Reboot for the changes to take effect.
-+
-[,sh]
-----
-sudo systemctl reboot
-----
-
-. Enable the GCR SSH agent socket for the user.
-+
-[,sh]
-----
-systemctl --user enable --now gcr-ssh-agent.socket
-----
-
 === Install
 
-Install these settings with the following instructions.
+My fish configuration relies on other utilities: {carapace-bin} for completions and {Starship} for the prompt configuration.
+
+. Follow the install instructions in the https://github.com/jwillikers/starship-config[Starship config repository] to configure the prompt.
+
+. Install {just} by following the instructions in the https://github.com/casey/just?tab=readme-ov-file#installation[installation section].
 
 . Clone this repository.
 +
 [,sh]
 ----
-git -C ~/Projects clone git@github.com:jwillikers/fish-config.git
+git clone git@github.com:jwillikers/fish-config.git
 ----
 
-. Create the _~/.config/fish/conf.d_ directory.
+. Change to the project's directory.
 +
 [,sh]
 ----
-mkdir --parents ~/.config/fish/conf.d
+cd fish-config
 ----
 
-. Symlink the configuration files in the `fish/conf.d` directory to the fish configuration directory.
+. Run `just` to install everything.
 +
 [,sh]
 ----
-ln --relative --symbolic --force ~/Projects/fish-config/fish/conf.d/*.fish ~/.config/fish/conf.d/
+just
 ----
 
-. Set the `SSH_AUTH_SOCK` environment variable to the GCR SSH agent socket.
+. On Fedora Atomic systems, reboot for the changes to take effect.
 +
 [,sh]
 ----
-set --universal --export SSH_AUTH_SOCK $XDG_RUNTIME_DIR/gcr/ssh
+sudo systemctl reboot
 ----
-
-. Follow the install instructions in the https://github.com/jwillikers/starship-config[Starship config repository] to configure the prompt.
 
 . Open a new shell to complete the installation.
 
