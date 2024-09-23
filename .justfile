@@ -9,7 +9,9 @@ format:
 install:
     #!/usr/bin/env bash
     set -euxo pipefail
-    sudo cp --update=none yum.repos.d/rsteube-fury.repo /etc/yum.repos.d/rsteube-fury.repo
+    if [ ! -f "/etc/yum.repos.d/rsteube-fury.repo" ] ; then
+        sudo cp --update=none yum.repos.d/rsteube-fury.repo /etc/yum.repos.d/rsteube-fury.repo
+    fi
     distro=$(awk -F= '$1=="ID" { print $2 ;}' /etc/os-release)
     if [ "$distro" = "fedora" ]; then
         variant=$(awk -F= '$1=="VARIANT_ID" { print $2 ;}' /etc/os-release)
