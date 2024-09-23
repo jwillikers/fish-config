@@ -10,6 +10,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 :carapace-bin: https://rsteube.github.io/carapace-bin/carapace-bin.html[carapace-bin]
+:direnv: https://direnv.net/[direnv]
 :fish: https://fishshell.com/[fish]
 :just: https://github.com/casey/just[just]
 :Starship: https://starship.rs/[Starship]
@@ -24,7 +25,7 @@ The following instructions detail how to use and sync this repository.
 
 === Install
 
-My fish configuration relies on other utilities: {carapace-bin} for completions and {Starship} for the prompt configuration.
+My fish configuration relies on other utilities: {carapace-bin} for completions, {Starship} for the prompt configuration, and {direnv} for automatic environment set up.
 
 . Follow the install instructions in the https://github.com/jwillikers/starship-config[Starship config repository] to configure the prompt.
 

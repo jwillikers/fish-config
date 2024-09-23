@@ -3,6 +3,7 @@
         "adoc",
         "atim",
         "COPR",
+        "direnv",
         "Gemfury",
         "gpgcheck",
         "ifdef",

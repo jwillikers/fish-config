@@ -14,9 +14,9 @@ install:
     if [ "$distro" = "fedora" ]; then
         variant=$(awk -F= '$1=="VARIANT_ID" { print $2 ;}' /etc/os-release)
         if [ "$variant" = "toolbx" ]; then
-            sudo dnf --assumeyes install carapace-bin fish
+            sudo dnf --assumeyes install carapace-bin fish direnv
         elif [ "$variant" = "iot" ] || [[ "$variant" = *-atomic ]]; then
-            sudo rpm-ostree install --idempotent carapace-bin fish
+            sudo rpm-ostree install --idempotent carapace-bin fish direnv
             echo "Reboot and rerun to finish installation."
         fi
     fi
